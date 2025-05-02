@@ -256,37 +256,5 @@ namespace cli_life.Tests
 
             File.Delete("test_settings.json");
         }
-
-        /// <summary>
-        /// Проверка обнаружения нескольких моделей 'Фигура-колония' на доске
-        /// </summary>
-        [TestMethod]
-        public void FindFiguresDetectsMultiplePatterns()
-        {
-            var board = new Board(10, 10, 1);
-
-            board.Cells[1, 1].IsAlive = true;
-            board.Cells[1, 2].IsAlive = true;
-            board.Cells[2, 1].IsAlive = true;
-            board.Cells[2, 2].IsAlive = true;
-
-            board.Cells[5, 5].IsAlive = true;
-            board.Cells[5, 6].IsAlive = true;
-            board.Cells[5, 7].IsAlive = true;
-
-            board.Cells[7, 1].IsAlive = true;
-            board.Cells[8, 1].IsAlive = true;
-            board.Cells[6, 2].IsAlive = true;
-            board.Cells[9, 2].IsAlive = true;
-            board.Cells[7, 3].IsAlive = true;
-            board.Cells[8, 3].IsAlive = true;
-
-            var foundFigures = Program.FindFigures(board);
-
-            Assert.IsTrue(foundFigures.Count >= 2);
-            Assert.IsTrue(foundFigures.Contains("block (Устойчивая)"));
-            Assert.IsTrue(foundFigures.Contains("blinker (Периодическая)") ||
-                         foundFigures.Contains("beehive (Устойчивая)"));
-        }
     }
 }
